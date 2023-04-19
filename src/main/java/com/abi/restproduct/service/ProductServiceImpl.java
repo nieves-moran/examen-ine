@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -23,6 +24,75 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findAll();
     }
 
-    // TODO: Agregar los metodos CRUD faltantes
+    @Override
+    public Product create(Product product){
+        return productRepository.save(product); 
+    }
 
+    @Override
+    public Optional<Product> delete(int productId){
+        Optional<Product> optProd = productRepository.findById(productId); 
+        if(optProd.isPresent()){
+            productRepository.deleteById(productId);
+        }
+        return optProd;
+    }
+
+    @Override
+    public Optional<Product> update(Product product){
+        Optional<Product> optProd = productRepository.findById(product.getId()); 
+        if(optProd.isPresent()){
+            productRepository.save(product); 
+        }
+        return optProd; 
+    }
+
+    @Override
+    public Optional<Product> updateName(int id,String name){
+        Optional<Product> optProd = productRepository.findById(id); 
+        if(optProd.isPresent()){
+            Product product= optProd.get(); 
+            product.setName(name);
+            productRepository.save(product); 
+        }
+        return optProd; 
+       
+    }
+
+    @Override
+    public Optional<Product> updateDescription(int id,String description){
+        Optional<Product> optProd = productRepository.findById(id); 
+        if(optProd.isPresent()){
+            Product product= optProd.get(); 
+            product.setDescription(description);
+            productRepository.save(product); 
+        }
+        return optProd; 
+       
+    }
+
+    @Override
+    public Optional<Product> updatePrice(int id,double price){
+        Optional<Product> optProd = productRepository.findById(id); 
+        if(optProd.isPresent()){
+            Product product= optProd.get(); 
+            product.setPrice(price);
+            productRepository.save(product); 
+        }
+        return optProd; 
+       
+    }
+
+    @Override
+    public Optional<Product> updateQuantity(int id,int quantity){
+        Optional<Product> optProd = productRepository.findById(id); 
+        if(optProd.isPresent()){
+            Product product= optProd.get(); 
+            product.setQuantity(quantity);
+            productRepository.save(product); 
+        }
+        return optProd; 
+       
+    }
 }
+    

@@ -1,12 +1,19 @@
 package com.abi.restproduct.model;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+
 public class ProductRequest {
 
     // TODO: Agregan validacion de datos (bean validations)
     private Integer id;
+    @NotNull
     private String name;
+    @NotNull
     private String description;
+    @Positive
     private Double price;
+    @Positive
     private Integer quantity;
 
     public Integer getId() {
